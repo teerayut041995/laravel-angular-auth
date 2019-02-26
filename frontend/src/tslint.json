@@ -12,6 +12,7 @@
             "element",
             "app",
             "kebab-case"
-        ]
+        ],
+        "whitespace": [false, "check-branch", "check-operator", "check-typecast"]
     }
 }
