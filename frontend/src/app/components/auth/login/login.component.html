@@ -1,0 +1,44 @@
+<div class="container-fluid">
+  <div class="row justify-content-md-center">
+    <div class="col-12 col-sm-6 col-lg-8">
+    <!-- form login start -->
+    <form #formLogin="ngForm" (submit)="onLogin(formLogin)" class="text-center">
+      <p class="h4 mb-4">Sign in</p>
+      <div class="alert alert-danger" role="alert" [hidden]="!error">
+        {{error}}
+      </div>
+      <div class="md-form">
+        <input type="email" name="email"  class="form-control" mdbInput ngModel #emailInput="ngModel" required email>
+        <label >E-mail</label>
+        <mdb-error *ngIf="emailInput.invalid  && (emailInput.dirty || emailInput.touched)">
+          กรุณากรอกอีเมล
+        </mdb-error>
+      </div>
+      <!-- Password -->
+      <div class="md-form">
+        <input type="password" name="password" class="form-control" mdbInput ngModel #passwordInput="ngModel" required>
+        <label >Password</label>
+        <mdb-error *ngIf="passwordInput.invalid  && (passwordInput.dirty || passwordInput.touched)">
+          กรุณากรอกรหัสผ่าน
+        </mdb-error>
+      </div>
+      <div class="d-flex justify-content-around">
+        <div>
+          <mdb-checkbox [default]="true">Remember me</mdb-checkbox>
+        </div>
+        <div>
+          <a href="">Forgot password?</a>
+        </div>
+      </div>
+      <button mdbBtn color="info" block="true" class="my-4" type="submit" [disabled]="!formLogin.valid">Sign in</button>
+      <p>Not a member?
+        <a routerLink="/auth/signup">Register</a>
+      </p>
+      <p>
+        <a routerLink="/request-password-reset">Reset Password</a>
+      </p>
+    </form>
+    <!-- form login end -->
+    </div>
+  </div>
+</div>

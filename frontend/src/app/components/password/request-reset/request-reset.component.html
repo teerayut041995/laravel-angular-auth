@@ -1,3 +1,27 @@
-<p>
-  request-reset works!
-</p>
+<p><br></p>
+<div class="container-fluid">
+  <div class="row justify-content-md-center">
+    <div class="col-12 col-sm-6 col-lg-8">
+    <!-- form login start -->
+    <form #formRequestReset="ngForm" (submit)="onRequetReset(formRequestReset)" class="text-center">
+      <p class="h4 mb-4">กรอกอีเมลของคุณ</p>
+      <div class="alert alert-danger" role="alert" [hidden]="!error">
+        {{error}}
+      </div>
+      <div class="md-form">
+        <input type="email" name="email"  class="form-control" mdbInput ngModel #emailInput="ngModel" required email>
+        <label >E-mail</label>
+        <mdb-error *ngIf="emailInput.invalid  && (emailInput.dirty || emailInput.touched)">
+          กรุณากรอกอีเมล
+        </mdb-error>
+      </div>
+
+      <button mdbBtn color="info" block="true" class="my-4" type="submit" [disabled]="!formRequestReset.valid">Send Password Reset Email.</button>
+      <p>Not a member?
+        <a routerLink="/auth/signup">Register</a>
+      </p>
+    </form>
+    <!-- form login end -->
+    </div>
+  </div>
+</div>

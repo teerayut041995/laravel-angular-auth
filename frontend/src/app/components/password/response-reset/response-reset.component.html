@@ -1,3 +1,44 @@
-<p>
-  response-reset works!
-</p>
+<p><br></p>
+<div class="container-fluid">
+  <div class="row justify-content-md-center">
+    <div class="col-12 col-sm-6 col-lg-8">
+    <!-- form login start -->
+    <form #formResetPassword="ngForm" (submit)="onResetPassword(formResetPassword)" class="text-center">
+      <p class="h4 mb-4">Reset Password</p>
+      <div class="md-form">
+        <input type="email" name="email"  class="form-control" mdbInput ngModel #emailInput="ngModel" required email>
+        <label >E-mail</label>
+        <mdb-error *ngIf="emailInput.invalid  && (emailInput.dirty || emailInput.touched)">
+          กรุณากรอกอีเมล
+        </mdb-error>
+        <span class="text-danger" [hidden]="!error.email">
+          {{error.email}}
+        </span>
+      </div>
+      <div class="md-form">
+        <input type="password" name="password" class="form-control" mdbInput ngModel #passwordInput="ngModel" required>
+        <label >รหัสผ่าน</label>
+        <mdb-error *ngIf="passwordInput.invalid  && (passwordInput.dirty || passwordInput.touched)">
+          กรุณากรอกรหัสผ่าน
+        </mdb-error>
+        <span class="text-danger"  [hidden]="!error.password">
+          {{error.password}}
+        </span>
+      </div>
+      <div class="md-form">
+        <input type="password" name="password_confirmation" class="form-control" mdbInput ngModel #passwordConfirmInput="ngModel" required>
+        <label >ยืนยันรหัสผ่าน</label>
+        <mdb-error *ngIf="(passwordConfirmInput.value  != passwordInput.value) && (passwordConfirmInput.dirty || passwordConfirmInput.touched)">
+          รหัสผ่านไม่ตรงกัน
+        </mdb-error>
+        <span class="text-danger"  [hidden]="!error.password_confirmation">
+          {{error.password_confirmation}}
+        </span>
+      </div>
+      <button mdbBtn color="info" block="true" class="my-4" type="submit" [disabled]="!formResetPassword.valid">Change Password.</button>
+
+    </form>
+    <!-- form login end -->
+    </div>
+  </div>
+</div>

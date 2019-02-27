@@ -1,0 +1,57 @@
+<div class="container-fluid">
+  <div class="row justify-content-md-center">
+    <div class="col-12 col-sm-6 col-lg-8">
+    <!-- form login start -->
+    <form class="text-center" #formSignup="ngForm" (submit)="onSignup(formSignup)">
+      <p class="h4 mb-4">Sign up</p>
+      <div class="md-form">
+        <input type="email" name="email"  class="form-control" mdbInput ngModel #emailInput="ngModel" required email>
+        <label >อีเมล</label>
+        <mdb-error *ngIf="emailInput.invalid  && (emailInput.dirty || emailInput.touched)">
+          กรุณากรอกอีเมล
+        </mdb-error>
+        <div class="alert alert-danger" role="alert" [hidden]="!error.email">
+          {{error.email}}
+        </div>
+      </div>
+      <div class="md-form">
+        <input type="text" name="name"  class="form-control" mdbInput ngModel #nameInput="ngModel" required>
+        <label >ชื่อ</label>
+        <mdb-error *ngIf="nameInput.invalid  && (nameInput.dirty || nameInput.touched)">
+          กรุณากรอกชื่อ
+        </mdb-error>
+        <div class="alert alert-danger" role="alert" [hidden]="!error.name">
+          {{error.name}}
+        </div>
+      </div>
+      <div class="md-form">
+        <input type="password" name="password" class="form-control" mdbInput ngModel #passwordInput="ngModel" required>
+        <label >รหัสผ่าน</label>
+        <mdb-error *ngIf="passwordInput.invalid  && (passwordInput.dirty || passwordInput.touched)">
+          กรุณากรอกรหัสผ่าน
+        </mdb-error>
+        <div class="alert alert-danger" role="alert" [hidden]="!error.email">
+          {{error.password}}
+        </div>
+      </div>
+      <div class="md-form">
+        <input type="password" name="confirm_password" class="form-control" mdbInput ngModel #passwordConfirmInput="ngModel" required>
+        <label >ยืนยันรหัสผ่าน</label>
+        <!-- <mdb-error *ngIf="passwordConfirmInput.invalid  && (passwordConfirmInput.dirty || passwordConfirmInput.touched)">
+          กรุณากรอกรหัสผ่าน
+        </mdb-error> -->
+        <mdb-error *ngIf="(passwordConfirmInput.value  != passwordInput.value) && (passwordConfirmInput.dirty || passwordConfirmInput.touched)">
+          รหัสผ่านไม่ตรงกัน
+        </mdb-error>
+      </div>
+      <button mdbBtn color="info" block="true" class="my-4" type="submit">Sign in</button>
+      <hr>
+      <p>By clicking
+        <em>Sign up</em> you agree to our
+        <a href="" target="_blank">terms of service</a> and
+        <a href="" target="_blank">terms of service</a>. </p>
+    </form>
+    <!-- form login end -->
+    </div>
+  </div>
+</div>

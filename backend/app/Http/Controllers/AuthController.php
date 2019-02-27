@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use App\User;
+use App\Http\Resources\User as UserResource;
+use App\Http\Resources\UserCollection;
+use App\Http\Requests\SignUpRequest;
 
 class AuthController extends Controller
 {
@@ -14,7 +20,12 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('auth:api', ['except' => ['login','signup' , 'show']]);
+    }
+
+    public function show($id)
+    {
+        return new UserResource(User::findOrFail($id));
     }
 
     /**
@@ -27,10 +38,26 @@ class AuthController extends Controller
         $credentials = request(['email', 'password']);
 
         if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['error' => 'Email or Password does\'t exist '], 401);
         }
 
         return $this->respondWithToken($token);
+    }
+
+    public function signup(SignUpRequest $request){
+        $user = User::create([
+            'name' => $request->get('name'),
+            'email' => $request->get('email'),
+            'password' => Hash::make($request->get('password')),
+        ]);
+        //$signup->save();
+        return $this->login($request);
+        // return response()->json([
+        //     'message' => 'Created user successfully'
+        //     ], 201);
+        // return (new UserResource($user))
+        //         ->response()
+        //         ->setStatusCode(201);
     }
 
     /**
